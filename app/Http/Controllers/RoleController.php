@@ -24,8 +24,8 @@ class RoleController extends Controller {
      */
     public function index() {
         $roles = Role::all();//Get all roles
-
-        return view('roles.index')->with('roles', $roles);
+        $user = Auth::user();
+        return view('roles.index')->with(compact('user','roles'));
     }
 
     /**
@@ -35,8 +35,8 @@ class RoleController extends Controller {
      */
     public function create() {
         $permissions = Permission::all();//Get all permissions
-
-        return view('roles.create', ['permissions'=>$permissions]);
+        $user = Auth::user();
+        return view('roles.create', ['permissions'=>$permissions])->with(compact('user'));
     }
 
     /**
@@ -92,8 +92,8 @@ class RoleController extends Controller {
     public function edit($id) {
         $role = Role::findOrFail($id);
         $permissions = Permission::all();
-
-        return view('roles.edit', compact('role', 'permissions'));
+        $user = Auth::user();
+        return view('roles.edit', compact('role', 'permissions','user'));
     }
 
     /**

@@ -1,6 +1,8 @@
 <?php
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
+use Illuminate\Http\Request;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -40,7 +42,32 @@ Route::resource('users', 'UserController');
 Route::resource('roles', 'RoleController');
 
 Route::resource('permissions', 'PermissionController');
+//profile
+Route::get('profile',function () {
+    $user = Auth::user();
+        return view('layouts.profile')->with(compact('user'));
+    });
 
+Route::post('profile', function (Request $request){
+
+    $request->validate([
+        'avatar' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+    ]);
+
+    $user = Auth::user();
+
+    $avatarName = $user->id.'_avatar'.time().'.'.request()->avatar->getClientOriginalExtension();
+
+    $request->avatar->storeAs('avatars',$avatarName);
+
+    //dd($user);
+    $user->avatar = $avatarName;
+    $user->save();
+
+    return back()
+        ->with('success','You have successfully upload image.');
+
+});
 // Route::get('/myadminmy', function(){
 //     $role = Role::create(['name' => 'Administer']);
 //     $permission = Permission::create(['name'=>'Administer roles & permissions']);

@@ -27,8 +27,10 @@ class UserController extends Controller {
     */
     public function index() {
     //Get all users and pass it to the view
+        $user = Auth::user();
         $users = User::all(); 
-        return view('users.index')->with('users', $users);
+        
+        return view('users.index')->with(compact('user','users'));
     }
 
     /**
@@ -39,7 +41,8 @@ class UserController extends Controller {
     public function create() {
     //Get all roles and pass it to the view
         $roles = Role::get();
-        return view('users.create', ['roles'=>$roles]);
+        $user = Auth::user();
+        return view('users.create', ['roles'=>$roles])->with(compact('user'));
     }
 
     /**
@@ -80,7 +83,8 @@ class UserController extends Controller {
     * @return \Illuminate\Http\Response
     */
     public function show($id) {
-        return redirect('users'); 
+        $user = Auth::user();
+        return redirect('users')->with(compact('user')); 
     }
 
     /**
@@ -92,7 +96,7 @@ class UserController extends Controller {
     public function edit($id) {
         $user = User::findOrFail($id); //Get user with specified id
         $roles = Role::get(); //Get all roles
-
+        //$user = Auth::user();
         return view('users.edit', compact('user', 'roles')); //pass user and roles data to view
 
     }
@@ -142,5 +146,30 @@ class UserController extends Controller {
         return redirect()->route('users.index')
             ->with('flash_message',
              'User successfully deleted.');
+    }
+    public function profile()
+    {
+        $user = Auth::user();
+        return view('layouts.profile')->with(compact('user'));
+    }
+    public function update_avatar(Request $request){
+
+        $request->validate([
+            'avatar' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+
+        $user = Auth::user();
+
+        $avatarName = $user->id.'_avatar'.time().'.'.request()->avatar->getClientOriginalExtension();
+
+        $request->avatar->storeAs('avatars',$avatarName);
+
+        //dd($user);
+        $user->avatar = $avatarName;
+        $user->save();
+
+        return back()
+            ->with('success','You have successfully uploaded your image! .');
+
     }
 }

@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Customer;
-
+use Auth;
 class CustomerController extends Controller
 {
     public function __construct() {
@@ -19,7 +19,8 @@ class CustomerController extends Controller
     public function index()
     {
         $customer = Customer::all();
-        return view('layouts.customer.viewcustomer')->with(compact('customer'));
+        $user = Auth::user();
+        return view('layouts.customer.viewcustomer')->with(compact('user','customer'));
     }
 
     /**
@@ -29,8 +30,8 @@ class CustomerController extends Controller
      */
     public function create()
     {
-
-        return view('layouts.customer.createcustomer');
+        $user = Auth::user();
+        return view('layouts.customer.createcustomer')->with(compact('user'));
     }
 
     /**
@@ -95,9 +96,9 @@ class CustomerController extends Controller
     public function edit($id)
     {
         $customer = Customer::find($id);
-        
+        $user = Auth::user();
         //the view tha creates the brief
-        return view('layouts.customer.editcustomer', compact('customer'));
+        return view('layouts.customer.editcustomer', compact('customer','user'));
     }
 
     /**
