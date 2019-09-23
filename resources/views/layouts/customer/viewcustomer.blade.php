@@ -1,4 +1,10 @@
 
+<style>
+    .color{
+        color: blue;
+    }
+   
+</style>
 
 @extends('layouts.master')
 @section('content')
@@ -76,10 +82,47 @@
                                 <input type="hidden" name="_method" value="delete" />
                                 {!! csrf_field() !!}
                             </form>
+                            {{-- <button type="button" class="btn btn-xs btn-default" data-toggle="modal" data-target="#modal-default">
+                                Detail View
+                            </button>  --}}
                         </td>
                         @endcan
                     </tr>
                     @endforeach
+                    {{-- <div class="modal fade" id="modal-default">
+                        <div class="modal-dialog">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span></button>
+                              <h4 class="modal-title">Default Modal</h4>
+                            </div>
+                            <div class="modal-body">
+                                    
+                              <p>
+                                  Customer Name <button type="button" class="btn btn-success btn-sm">{{ $customers->customername }}</button></p>
+                                <p>Customer Number <button type="button" class="btn btn-success btn-sm" width="12">{{ $customers->customernumber }}</button>
+                                </p>
+                              
+                                <p>Product <button type="button" class="btn btn-success btn-sm" width="12">{{ $customers->product }}</button></p>
+                                <p>Serial Number <button type="button" class="btn btn-success btn-sm" width="12"> {{ $customers->serialnumber }}</button></p>
+                                <p>Model Number <button type="button" class="btn btn-success btn-sm" width="12">{{ $customers->modelnumber }}</button></p>
+                                <p>Warranty <button type="button" class="btn btn-success btn-sm" width="12"> {{ $customers->warranty }}</button></p>
+                                <p>Warranty Card Number <button type="button" class="btn btn-success btn-sm" width="12"> {{ $customers->warrantycard }}</button></p>
+                                <p>Receipt Number <button type="button" class="btn btn-success btn-sm" width="12"> {{ $customers->receiptnumber }}</button></p>
+                                <p>Place of Purchase <button type="button" class="btn btn-success btn-sm" width="12">{{ $customers->placeofpurchase}}</button></p>
+                                <p>Date of Purchase <button type="button" class="btn btn-success btn-sm" width="12"> {{$date2}}</button></p>
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+                              <button type="button" class="btn btn-primary">Save changes</button>
+                            </div>
+                          </div>
+                          <!-- /.modal-content -->
+                        </div>
+                        <!-- /.modal-dialog -->
+                      </div>
+                      <!-- /.modal --> --}}
                 </tbody>
                 
                 <tfoot>

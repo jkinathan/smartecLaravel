@@ -36,19 +36,18 @@ immediately after the control sidebar -->
 <script src="{{ asset('adminlte/dist/js/adminlte.min.js') }}"></script>
 
 <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+{{-- <script
+  src="https://code.jquery.com/jquery-3.4.1.js"
+  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+  crossorigin="anonymous"></script> --}}
 <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
 <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
 <script src="https://cdn.datatables.net/responsive/2.2.3/js/responsive.bootstrap.min.js"></script>
 
 <script>
-    $(document).ready(function() {
-    $('#example').DataTable(
-      {
-        responsive: true
-      }
-    );
-    
+   $(document).ready(function() {
+    $('#example').DataTable();
 } );
 </script>
 </body>

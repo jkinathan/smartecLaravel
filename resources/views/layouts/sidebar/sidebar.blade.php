@@ -49,7 +49,7 @@
           <li><a href="{{ url('/customer/customers') }}"><i class="fa fa-circle-o"></i> View Customers</a></li>
         </ul>
       </li>
-      @if(Auth::user()->email == 'Admin@admin.com')
+      @if(Auth::user()->email == 'admin@admin.com')
       <li class="treeview">
         {{-- <a href="#">
           <i class="fa fa-user"></i>
